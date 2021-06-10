@@ -10,8 +10,8 @@ import android.widget.TextView
 
 class ProfileActivity : AppCompatActivity() {
 
-    var newusernameET : EditText? = null
-    var backBtn : Button? = null
+    lateinit var newusernameET : EditText
+    lateinit var backBtn : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,12 +22,12 @@ class ProfileActivity : AppCompatActivity() {
         newusernameET = findViewById(R.id.newusernameET)
         backBtn = findViewById(R.id.backBtn)
 
-        newusernameET?.setText(username)
+        newusernameET.setText(username)
 
 
-        backBtn?.setOnClickListener{
+        backBtn.setOnClickListener{
             val i = Intent().apply {
-                putExtra("username",newusernameET?.text.toString())
+                putExtra("username",newusernameET.text.toString())
             }
             setResult(Activity.RESULT_OK, i)
             finish()

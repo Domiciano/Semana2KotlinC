@@ -11,8 +11,10 @@ import android.widget.Toast
 
 class NewItemFragment : Fragment() {
 
-    var newTaskET: EditText? = null
-    var addBtn: Button? = null
+    lateinit var newTaskET: EditText
+    lateinit var addBtn: Button
+
+    var listener : OnNewTaskListener? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,14 +24,20 @@ class NewItemFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_new_item, container, false)
         newTaskET = root.findViewById(R.id.newTaskET)
         addBtn = root.findViewById(R.id.addBtn)
-        addBtn?.setOnClickListener(::addNewTask)
+        addBtn.setOnClickListener(::addNewTask)
 
         return root
     }
 
     fun addNewTask(view:View){
-        val str = newTaskET?.text.toString()
+        val str = newTaskET.text.toString()
         Toast.makeText(context, str, Toast.LENGTH_LONG).show()
+        listener?.onNewTask(str)
+    }
+
+    //Patrón observer
+    interface OnNewTaskListener {
+        fun onNewTask(task:String)
     }
 
     companion object {

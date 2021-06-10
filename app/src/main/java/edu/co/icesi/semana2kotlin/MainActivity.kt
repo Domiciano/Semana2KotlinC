@@ -15,9 +15,9 @@ import androidx.activity.result.contract.ActivityResultContracts.StartActivityFo
 
 class MainActivity : AppCompatActivity() {
 
-    var usernameET: EditText? = null
-    var passwordET: EditText? = null
-    var loginBtn: Button? = null
+    lateinit var usernameET: EditText
+    lateinit var passwordET: EditText
+    lateinit var loginBtn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,9 +30,9 @@ class MainActivity : AppCompatActivity() {
         passwordET = findViewById(R.id.passwordET)
         loginBtn = findViewById(R.id.loginBtn)
 
-        loginBtn?.setOnClickListener {
-            val user = usernameET?.text.toString()
-            val pass = passwordET?.text.toString()
+        loginBtn.setOnClickListener {
+            val user = usernameET.text.toString()
+            val pass = passwordET.text.toString()
 
             Toast.makeText(this, "${user}:${pass}", Toast.LENGTH_LONG).show()
             val intent = Intent(this, ProfileActivity::class.java).apply {
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         if (result.resultCode == Activity.RESULT_OK) {
             val data: Intent? = result.data
             val username = data?.extras?.getString("username")!!
-            usernameET?.setText(username)
+            usernameET.setText(username)
         }
 
     }
